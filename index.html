@@ -7,7 +7,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;300;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Transparencias extremas estilo ISO 26 */
             --glass: rgba(255, 255, 255, 0.03);
             --border: rgba(255, 255, 255, 0.12);
             --accent: #00f2ff;
@@ -19,19 +18,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #020205; /* Fondo profundo */
+            background: #020205;
             font-family: 'Outfit', sans-serif;
             color: white;
             overflow: hidden;
         }
 
-        /* FONDO DINÁMICO DE AURORAS Y ONDAS */
         .background-visuals {
             position: absolute;
             width: 100%;
             height: 100%;
             z-index: -1;
-            overflow: hidden;
         }
 
         .orb {
@@ -40,39 +37,36 @@
             height: 600px;
             border-radius: 50%;
             filter: blur(100px);
-            opacity: 0.4;
+            opacity: 0.3;
             animation: float 15s infinite alternate ease-in-out;
         }
-        .orb-blue { background: #0066ff; top: 10%; left: -10%; }
-        .orb-red { background: #ff2200; bottom: 10%; right: -10%; animation-delay: -7s; }
+        .orb-blue { background: #0066ff; top: -10%; left: -10%; }
+        .orb-red { background: #ff2200; bottom: -10%; right: -10%; animation-delay: -7s; }
 
         @keyframes float {
-            0% { transform: scale(1) translate(0, 0); }
-            100% { transform: scale(1.3) translate(100px, 50px); }
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(100px, 50px) scale(1.2); }
         }
 
-        /* TARJETA ULTRA TRANSPARENTE */
         .glass-card {
             background: var(--glass);
             backdrop-filter: blur(40px) saturate(160%);
             -webkit-backdrop-filter: blur(40px);
             border: 1px solid var(--border);
             border-radius: 30px;
-            padding: 80px 50px;
+            padding: 60px 40px;
             text-align: center;
-            width: 500px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8), 
-                        inset 0 0 20px rgba(255,255,255,0.05);
-            position: relative;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
         }
 
-        /* BRANDING GRANDE Y ELEGANTE */
         .brand {
-            font-size: 2.8rem;
+            font-size: 2rem;
             font-weight: 100;
-            letter-spacing: 15px;
+            letter-spacing: 10px;
             text-transform: uppercase;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
             background: linear-gradient(to bottom, #fff, rgba(255,255,255,0.3));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -80,47 +74,42 @@
 
         .status-label {
             opacity: 0.5;
-            font-size: 0.7rem;
-            letter-spacing: 5px;
-            margin-bottom: 5px;
+            font-size: 0.6rem;
+            letter-spacing: 4px;
+            margin-bottom: 10px;
         }
 
-        /* NÚMERO DE VELOCIDAD */
         .speed-container {
             display: flex;
             align-items: baseline;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
         .speed-value {
-            font-size: 130px;
+            font-size: 100px;
             font-weight: 900;
             margin: 0;
-            letter-spacing: -5px;
-            line-height: 0.8;
+            letter-spacing: -4px;
         }
 
         .unit {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             font-weight: 300;
-            margin-left: 15px;
-            color: rgba(255,255,255,0.6);
+            margin-left: 10px;
+            color: var(--accent);
         }
 
-        /* VISUALIZADOR DE ONDAS (CANVAS) */
         canvas {
             width: 100%;
-            height: 40px;
-            margin-bottom: 20px;
+            height: 60px;
         }
 
-        /* BARRA DE PROGRESO LÍQUIDA */
         .progress-container {
             width: 100%;
-            height: 2px;
+            height: 3px;
             background: rgba(255,255,255,0.05);
-            margin-bottom: 40px;
+            margin: 25px 0;
             border-radius: 10px;
             overflow: hidden;
         }
@@ -129,34 +118,36 @@
             height: 100%; 
             background: var(--accent); 
             box-shadow: 0 0 15px var(--accent);
+            transition: width 0.3s linear;
         }
 
         .btn-test {
             background: transparent;
             border: 1px solid var(--border);
             color: white;
-            padding: 15px 45px;
-            border-radius: 10px;
-            font-size: 0.8rem;
-            letter-spacing: 3px;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            letter-spacing: 2px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: 0.4s;
+            transition: 0.3s;
         }
         .btn-test:hover:not(:disabled) {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--accent);
+            background: white;
+            color: black;
         }
-        .btn-test:disabled { opacity: 0.2; }
+        .btn-test:disabled { opacity: 0.3; cursor: not-allowed; }
 
         .recommendation {
-            margin-top: 30px;
-            font-size: 0.9rem;
-            font-weight: 300;
+            margin-top: 25px;
+            font-size: 0.85rem;
+            height: 20px;
             opacity: 0;
-            transition: 1s;
+            transform: translateY(10px);
+            transition: 0.5s;
         }
-        .show { opacity: 1; }
+        .show { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
@@ -167,12 +158,11 @@
     </div>
 
     <div class="glass-card">
-        <div class="brand">Wiriless A&A</div>
-        
-        <p class="status-label">ESTADO DE TRANSFERENCIA</p>
+        <div class="brand">Wireless A&A</div>
+        <p class="status-label" id="status-text">LISTO PARA ANALIZAR</p>
         
         <div class="speed-container">
-            <h1 class="speed-value" id="speed">0.0</h1>
+            <h1 class="speed-value" id="speed">0</h1>
             <span class="unit">Mbps</span>
         </div>
 
@@ -195,81 +185,95 @@
         const startBtn = document.getElementById('startBtn');
         const recBox = document.getElementById('recBox');
         const recText = document.getElementById('recText');
+        const statusText = document.getElementById('status-text');
         const canvas = document.getElementById('waveCanvas');
         const ctx = canvas.getContext('2d');
 
-        // Configuración de Canvas (Ondas)
         canvas.width = 400;
-        canvas.height = 40;
+        canvas.height = 60;
         let offset = 0;
+        let waveIntensity = 1;
 
+        // Animación de ondas suave
         function animateWaves() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.beginPath();
             ctx.strokeStyle = '#00f2ff';
-            ctx.lineWidth = 1;
-            for (let x = 0; x < canvas.width; x++) {
-                let y = 20 + Math.sin(x * 0.05 + offset) * 5;
-                ctx.lineTo(x, y);
+            ctx.lineWidth = 2;
+            
+            for (let x = 0; x <= canvas.width; x += 5) {
+                // La onda reacciona sutilmente a la velocidad simulada
+                let y = 30 + Math.sin(x * 0.03 + offset) * (10 * waveIntensity);
+                x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
             }
             ctx.stroke();
-            offset += 0.1;
+            offset += 0.08;
             requestAnimationFrame(animateWaves);
         }
         animateWaves();
 
-        // MEDICIÓN DE PRECISIÓN (20 SEGUNDOS)
-        const testFile = "https://speed.cloudflare.com/__down?bytes=20000000";
+        // Lógica de medición mejorada
+        const testFile = "https://speed.cloudflare.com/__down?bytes=15000000"; // 15MB
 
-        async function fetchSpeed() {
-            try {
-                const start = performance.now();
-                const res = await fetch(testFile + "&cb=" + Math.random());
-                const blob = await res.blob();
-                const end = performance.now();
-                const duration = (end - start) / 1000;
-                return (blob.size * 8 / (1024 * 1024)) / duration;
-            } catch { return 0; }
-        }
-
-        startBtn.onclick = async () => {
+        async function runTest() {
             startBtn.disabled = true;
             startBtn.innerText = "Midiendo...";
             recBox.classList.remove('show');
+            statusText.innerText = "DESCARGANDO PAQUETES...";
             
-            let startTime = Date.now();
-            let duration = 20000; // 20 segundos
-            let history = [];
+            const startTime = performance.now();
+            let progress = 0;
+            
+            // Simulación visual de progreso mientras descarga
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {
+                    progress += 0.5;
+                    pBar.style.width = progress + "%";
+                }
+            }, 100);
 
-            const timer = setInterval(async () => {
-                let elapsed = Date.now() - startTime;
-                let progress = (elapsed / duration) * 100;
-                pBar.style.width = progress + "%";
-
-                let s = await fetchSpeed();
-                if (s > 0) {
-                    history.push(s);
-                    let avg = history.reduce((a,b) => a+b) / history.length;
-                    speedEl.innerText = (avg + (Math.random() * 2)).toFixed(1);
+            try {
+                const response = await fetch(testFile + "&cb=" + Date.now());
+                const reader = response.body.getReader();
+                let receivedLength = 0;
+                
+                // Procesar la descarga por fragmentos para calcular velocidad real
+                while(true) {
+                    const {done, value} = await reader.read();
+                    if (done) break;
+                    receivedLength += value.length;
                 }
 
-                if (elapsed >= duration) {
-                    clearInterval(timer);
-                    let final = (history.reduce((a,b) => a+b) / history.length).toFixed(1);
-                    speedEl.innerText = final;
-                    showRec(parseFloat(final));
-                }
-            }, 800);
-        };
+                const endTime = performance.now();
+                const durationInSeconds = (endTime - startTime) / 1000;
+                const bitsLoaded = receivedLength * 8;
+                const speedMbps = (bitsLoaded / 1024 / 1024) / durationInSeconds;
+
+                // Resultado final
+                clearInterval(progressInterval);
+                pBar.style.width = "100%";
+                speedEl.innerText = speedMbps.toFixed(1);
+                showRec(speedMbps);
+
+            } catch (error) {
+                console.error(error);
+                statusText.innerText = "ERROR DE CONEXIÓN";
+                startBtn.disabled = false;
+            }
+        }
 
         function showRec(speed) {
             startBtn.disabled = false;
-            startBtn.innerText = "Repetir";
+            startBtn.innerText = "Repetir Test";
+            statusText.innerText = "ANÁLISIS COMPLETADO";
             recBox.classList.add('show');
+            
             if(speed > 60) recText.innerHTML = "✨ <b>Ultra-Fluid:</b> Calidad máxima para 4K y Cine Digital.";
-            else if(speed > 25) recText.innerHTML = "🎬 <b>HD-Smooth:</b> Perfecto para streaming 1080p sin cortes.";
-            else recText.innerHTML = "📱 <b>Mobile-Ready:</b> Optimo para redes sociales y música.";
+            else if(speed > 25) recText.innerHTML = "🎬 <b>HD-Smooth:</b> Perfecto para streaming 1080p.";
+            else recText.innerHTML = "📱 <b>Mobile-Ready:</b> Óptimo para redes sociales.";
         }
+
+        startBtn.addEventListener('click', runTest);
     </script>
 </body>
 </html>
